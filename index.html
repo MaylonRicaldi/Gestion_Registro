@@ -27,6 +27,7 @@ z-index:999;
     <a href="#" onclick="mostrar('registro')">📝 Registrar</a>
     <a href="#" onclick="mostrar('lista')">📋 Lista</a>
     <a href="#" onclick="mostrar('guias')">🚚 Guías</a>
+    <a href="#" onclick="mostrar('seguimiento')">📊 Seguimiento</a>
 </div>
 
 <div class="main">
@@ -93,6 +94,24 @@ z-index:999;
         <button type="submit">Subir Excel</button>
     </form>
 </div>
+
+<!-- SEGUIMIENTO -->
+<div id="seguimiento" style="display:none;">
+    <h1>📊 Historial de Seguimiento</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody id="tablaSeguimiento"></tbody>
+    </table>
+</div>
+
 
 <!-- LISTA -->
 <div id="lista" style="display:none;">

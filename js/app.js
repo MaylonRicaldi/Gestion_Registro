@@ -219,6 +219,44 @@ function cargarGuias(){
         });
     });
 }
+function cargarSeguimiento(){
+    fetch("seguimiento.php")
+    .then(res => res.json())
+    .then(data => {
+
+        let tabla = document.getElementById("tablaSeguimiento");
+        tabla.innerHTML = "";
+
+        data.forEach(s => {
+            tabla.innerHTML += `
+            <tr>
+                <td>${s.id}</td>
+                <td>${s.codigo}</td>
+                <td>${s.estado}</td>
+                <td>${s.fecha ?? ''}</td>
+            </tr>
+            `;
+        });
+    });
+}
+
+function mostrar(seccion){
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("registro").style.display = "none";
+    document.getElementById("lista").style.display = "none";
+    document.getElementById("guias").style.display = "none";
+    document.getElementById("seguimiento").style.display = "none";
+
+    document.getElementById(seccion).style.display = "block";
+
+    if(seccion === "guias"){
+        cargarGuias();
+    }
+
+    if(seccion === "seguimiento"){
+        cargarSeguimiento();
+    }
+}
 
 // =============================
 // GLOBAL
