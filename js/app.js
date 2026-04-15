@@ -86,7 +86,10 @@ function renderizarTabla(){
         tabla.innerHTML += `
         <tr>
             <td>
-                <input type="checkbox" name="documentos[]" value="${doc.id}">
+                <input type="checkbox" name="documentos[]" value="${doc.id}"
+                ${(doc.estado === "Cargo de envio" ||
+                doc.estado === "Cargo devuelto entregado" ||
+                doc.estado === "No recepcionado") ? "disabled" : ""}>
             </td>
             <td>${doc.codigo}</td>
             <td>${doc.tipo}</td>
