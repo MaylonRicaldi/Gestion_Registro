@@ -17,8 +17,8 @@ if($numero=="" || $tipo=="" || $fecha=="" || $remitente=="" || $despacho==""){
 }
 
 // VALIDAR NÚMERO
-if(!is_numeric($numero) || $numero < 1 || $numero > 9){
-    echo "<script>alert('⚠️ Número inválido (1-9)'); window.location='index.html';</script>";
+if(!is_numeric($numero) || $numero < 1 || $numero > 99999){
+    echo "<script>alert('⚠️ Número inválido (1-99999)'); window.location='index.html';</script>";
     exit();
 }
 

@@ -3,6 +3,7 @@ require 'vendor/autoload.php';
 include("conexion.php");
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 if(isset($_FILES['archivo']['tmp_name'])){
 
@@ -16,9 +17,18 @@ if(isset($_FILES['archivo']['tmp_name'])){
 
         $numero = $filas[$i][0];
         $tipo = $filas[$i][1];
-        $fecha = $filas[$i][2];
+        $fechaExcel = $filas[$i][2];
         $remitente = $filas[$i][3];
         $despacho = $filas[$i][4];
+
+        // =========================
+        // 🔥 CONVERSIÓN DE FECHA CORRECTA
+        // =========================
+        if (is_numeric($fechaExcel)) {
+            $fecha = date("Y-m-d", strtotime("1899-12-30 +$fechaExcel days"));
+        } else {
+            $fecha = date("Y-m-d", strtotime($fechaExcel));
+        }
 
         if($numero=="" || $tipo=="" || $fecha=="" || $remitente=="" || $despacho==""){
             continue;

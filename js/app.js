@@ -21,18 +21,20 @@ function mostrar(seccion){
 // =============================
 document.getElementById("formRegistro").addEventListener("submit", function(e){
 
-    let numero = document.querySelector("[name='numero']").value.trim();
+    let numero = parseInt(document.querySelector("[name='numero']").value.trim());
 
-    if(numero === "" || isNaN(numero)){
+    if(isNaN(numero)){
         alert("Ingrese un número válido");
         e.preventDefault();
         return;
     }
 
-    if(numero < 1 || numero > 999){
-        alert("Número debe estar entre 1 y 999");
+    if(numero < 1 || numero > 99999){
+        alert("Número debe estar entre 1 y 99999");
         e.preventDefault();
+        return;
     }
+
 });
 
 // =============================
