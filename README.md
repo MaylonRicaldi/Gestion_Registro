@@ -57,3 +57,6 @@ CREATE TABLE seguimiento (
     
     FOREIGN KEY (id_documento) REFERENCES documento(id)
 );
+
+Inserción de datos: 
+Para la insercion de datos por medio de un excel utilizamos COMPOSER que nos permitio subir archivos excel en nuestro sistema.
