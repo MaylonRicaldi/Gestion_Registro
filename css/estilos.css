@@ -79,3 +79,13 @@ th {
     background: #1565C0;
     color: white;
 }
+
+#contenedorTabla {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#contenedorTabla {
+    max-height: 400px; /* ajusta a tu gusto */
+    overflow-y: auto;
+}

@@ -1,0 +1,12 @@
+{
+    "name": "asus/gestion_registro",
+    "authors": [
+        {
+            "name": "MaylonRicaldi",
+            "email": "72699993@continental.edu.pe"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^5.6"
+    }
+}

@@ -8,11 +8,25 @@
 
 <body>
 
+<!-- 🔔 MENSAJE -->
+<div id="mensaje" style="
+position: fixed;
+top: 20px;
+right: 20px;
+background: #1565C0;
+color: white;
+padding: 15px;
+border-radius: 8px;
+display:none;
+z-index:999;
+"></div>
+
 <div class="sidebar">
     <h2>📂 Sistema</h2>
     <a href="#" onclick="mostrar('dashboard')">📊 Dashboard</a>
     <a href="#" onclick="mostrar('registro')">📝 Registrar</a>
     <a href="#" onclick="mostrar('lista')">📋 Lista</a>
+    <a href="#" onclick="mostrar('guias')">🚚 Guías</a>
 </div>
 
 <div class="main">
@@ -34,17 +48,15 @@
 <div id="registro" style="display:none;">
     <h1>Registrar Documento</h1>
 
-        <form action="guardar.php" method="POST" id="formRegistro">
+    <form action="guardar.php" method="POST" id="formRegistro">
         <h2>Registrar Documento</h2>
 
-        <!-- CÓDIGO -->
         <label>Código (Ingrese solo el número)</label>
         <div style="display:flex; gap:5px;">
             <input type="text" value="DOC" readonly style="width:70px;">
             <input type="number" name="numero" placeholder="Ej: 1" min="1" max="999" required>
         </div>
 
-        <!-- TIPO -->
         <label>Tipo de Documento</label>
         <select name="tipo" required>
             <option value="">Seleccione...</option>
@@ -54,16 +66,14 @@
             <option value="Informe">Informe</option>
         </select>
 
-        <!-- FECHA -->
         <label>Fecha de Recepción</label>
-       <input type="date" name="fecha" required>
-        <label>Remitente (solo letras)</label>
-        <input type="text" name="remitente" placeholder="Ej: Juan Perez"
-            pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" 
-            title="Solo letras y espacios"
+        <input type="date" name="fecha" required>
+
+        <label>Remitente</label>
+        <input type="text" name="remitente"
+            pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+"
             required>
 
-        <!-- DESPACHO -->
         <label>Despacho</label>
         <select name="despacho" required>
             <option value="">Seleccione...</option>
@@ -75,31 +85,76 @@
 
         <button type="submit">Registrar</button>
     </form>
+
+    <!-- 📤 EXCEL -->
+    <h2>📤 Registro Masivo (Excel)</h2>
+    <form action="importar_excel.php" method="POST" enctype="multipart/form-data">
+        <input type="file" name="archivo" accept=".xlsx,.xls" required>
+        <button type="submit">Subir Excel</button>
+    </form>
 </div>
 
 <!-- LISTA -->
 <div id="lista" style="display:none;">
     <h1>Lista de Documentos</h1>
 
-    <form action="generar_guia.php" method="POST">
+    <!-- 🔍 FILTROS -->
+    <div style="display:flex; gap:10px; margin-bottom:10px;">
+        <input type="text" id="buscarCodigo" placeholder="Buscar por código">
+
+        <select id="filtroDespacho">
+            <option value="">Todos los despachos</option>
+            <option value="Fiscalía 1">Fiscalía 1</option>
+            <option value="Fiscalía 2">Fiscalía 2</option>
+            <option value="Administración">Administración</option>
+            <option value="Logística">Logística</option>
+        </select>
+
+        <select id="filtroEstado">
+            <option value="">Todos los estados</option>
+            <option value="Pendiente de entrega">Pendiente</option>
+            <option value="Cargo de envio">Enviado</option>
+            <option value="Cargo devuelto entregado">Entregado</option>
+            <option value="No recepcionado">No recibido</option>
+        </select>
+    </div>
+
+    <!-- 🔥 FORM UNIFICADO -->
+    <form id="formGuia" action="generar_guia.php" method="POST">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>✔</th>
+                    <th>Código</th>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Remitente</th>
+                    <th>Despacho</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="tabla"></tbody>
+        </table>
+
+        <button type="submit">🚚 Generar Guía</button>
+    </form>
+</div>
+
+<!-- 🚚 GUIAS -->
+<div id="guias" style="display:none;">
+    <h1>Guías Generadas</h1>
 
     <table>
         <thead>
             <tr>
-                <th>✔</th>
-                <th>Código</th>
-                <th>Tipo</th>
+                <th>N° Guía</th>
                 <th>Fecha</th>
-                <th>Remitente</th>
                 <th>Despacho</th>
-                <th>Estado</th>
             </tr>
         </thead>
-        <tbody id="tabla"></tbody>
+        <tbody id="tablaGuias"></tbody>
     </table>
-
-    <button type="submit">🚚 Generar Guía</button>
-    </form>
 </div>
 
 </div>

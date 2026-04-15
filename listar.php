@@ -11,7 +11,7 @@ dp.nombre AS despacho,
 d.estado
 FROM documento d
 JOIN despacho dp ON d.id_despacho = dp.id
-ORDER BY d.id DESC";
+ORDER BY LENGTH(d.codigo), d.codigo ASC";
 
 $result = mysqli_query($conn, $sql);
 

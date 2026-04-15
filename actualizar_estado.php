@@ -4,22 +4,29 @@ include("conexion.php");
 $id = $_POST['id'] ?? '';
 $estado = $_POST['estado'] ?? '';
 
-if($id == "" || $estado == ""){
+// VALIDACIÓN
+if (empty($id) || empty($estado)) {
     echo "Error: datos vacíos";
     exit();
 }
 
-// ACTUALIZAR
-$sql = "UPDATE documento SET estado='$estado' WHERE id=$id";
+// PREPARAR CONSULTA (más seguro)
+$stmt = $conn->prepare("UPDATE documento SET estado=? WHERE id=?");
+$stmt->bind_param("si", $estado, $id);
 
-if(mysqli_query($conn, $sql)){
+if ($stmt->execute()) {
 
-    mysqli_query($conn, "INSERT INTO seguimiento (id_documento, estado)
-    VALUES ($id, '$estado')");
+    // INSERTAR EN SEGUIMIENTO
+    $stmt2 = $conn->prepare("INSERT INTO seguimiento (id_documento, estado) VALUES (?, ?)");
+    $stmt2->bind_param("is", $id, $estado);
+    $stmt2->execute();
 
     echo "ok";
 
 } else {
-    echo "Error: " . mysqli_error($conn);
+    echo "Error: " . $conn->error;
 }
+
+$stmt->close();
+$conn->close();
 ?>
