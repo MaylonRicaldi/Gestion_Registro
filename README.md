@@ -1,11 +1,20 @@
-Desarrollado por:
+# 📂 Sistema de Registro y Distribución de Documentos
 
-- Ricaldi Solis Maylon
-- Javier Curi Dayana
-- Santos Tocas Fernando
+Sistema web desarrollado para la gestión, control y seguimiento de documentos dentro de una institución, permitiendo automatizar procesos de registro, envío y trazabilidad.
 
-Creacion de base de datos:
+---
 
+## 👨‍💻 Desarrollado por:
+
+- 👤 Ricaldi Solis Maylon  
+- 👤 Javier Curi Dayana  
+- 👤 Santos Tocas Fernando  
+
+---
+
+## 🗄️ Creación de la Base de Datos
+
+```sql
 CREATE DATABASE sistema_documentos;
 USE sistema_documentos;
 
@@ -13,6 +22,7 @@ CREATE TABLE despacho (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL
 );
+
 INSERT INTO despacho (nombre) VALUES
 ('Fiscalía 1'),
 ('Fiscalía 2'),
@@ -57,6 +67,3 @@ CREATE TABLE seguimiento (
     
     FOREIGN KEY (id_documento) REFERENCES documento(id)
 );
-
-Inserción de datos: 
-Para la insercion de datos por medio de un excel utilizamos COMPOSER que nos permitio subir archivos excel en nuestro sistema.
